@@ -41,20 +41,6 @@ QBCore.Functions.CreateCallback("weapons:server:GetConfig", function(_, cb)
     cb(Config.RepairPoints)
 end)
 
-QBCore.Functions.CreateCallback("weapon:server:GetWeaponAmmo", function(source, cb, WeaponData)
-    local Player = QBCore.Functions.GetPlayer(source)
-    local retval = 0
-    if WeaponData then
-        if Player then
-            local ItemData = Player.Functions.GetItemBySlot(WeaponData.slot)
-            if ItemData then
-                retval = ItemData.info.ammo and ItemData.info.ammo or 0
-            end
-        end
-    end
-    cb(retval, WeaponData.name)
-end)
-
 QBCore.Functions.CreateCallback('weapons:server:RemoveAttachment', function(source, cb, AttachmentData, ItemData)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
@@ -69,6 +55,7 @@ QBCore.Functions.CreateCallback('weapons:server:RemoveAttachment', function(sour
                     Player.Functions.SetInventory(Player.PlayerData.items, true)
                     Player.Functions.AddItem(AttachmentComponent.item, 1, false, v)
                     TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[AttachmentComponent.item], "add")
+                    TriggerClientEvent('weapons:client:ReloadWeapon', src)
                     TriggerClientEvent("QBCore:Notify", src, Lang:t('info.removed_attachment', { value = QBCore.Shared.Items[AttachmentComponent.item].label }), "error")
                 end
                 cb(Inventory[ItemData.slot].info.attachments)
@@ -147,9 +134,9 @@ QBCore.Functions.CreateCallback('prison:server:checkThrowable', function(source,
     local Player = QBCore.Functions.GetPlayer(source)
     if not Player then return cb(false) end
     local throwable = false
-    for _, v in pairs(Config.Throwables) do
-        if QBCore.Shared.Weapons[weapon].name == 'weapon_'..v then
-            Player.Functions.RemoveItem(v, 1)
+    for _,v in pairs(Config.Throwables) do
+        if QBCore.Shared.Weapons[weapon].name == v then
+            if not Player.Functions.RemoveItem(v, 1) then return cb(false) end
             throwable = true
             break
         end
@@ -157,6 +144,30 @@ QBCore.Functions.CreateCallback('prison:server:checkThrowable', function(source,
     cb(throwable)
 end)
 
+QBCore.Functions.CreateCallback('weapons:server:getAmmoCount', function(source, cb, ammoItem)
+    local Player = QBCore.Functions.GetPlayer(source)
+    if not Player then return end
+    local ammoCount = 0
+    for _, item in pairs(Player.PlayerData.items) do
+        if item.name == ammoItem then
+            ammoCount += item.amount
+        end
+    end
+    cb(ammoCount)
+end)
+
+QBCore.Functions.CreateCallback('weapons:server:removeAmmo', function(source, cb, item)
+    local Player = QBCore.Functions.GetPlayer(source)
+    if not Player or not item.name or not item.amount then return end
+    local items = Player.PlayerData.items
+
+    if Player.Functions.RemoveItem(item.name, item.amount) then
+        TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items[item.name], "remove", item.amount)
+        cb(true)
+    else
+        cb(false)
+    end
+end)
 -------------------------------- EVENTS --------------------------------
 
 RegisterServerEvent("weapon:repairTime", function()
@@ -201,9 +212,9 @@ RegisterNetEvent('weapons:server:UpdateWeaponQuality', function(data, RepeatAmou
     local Player = QBCore.Functions.GetPlayer(src)
     local WeaponData = QBCore.Shared.Weapons[GetHashKey(data.name)]
     local WeaponSlot = Player.PlayerData.items[data.slot]
-    local DecreaseAmount = Config.DurabilityMultiplier[data.name]
+    local DecreaseAmount = Config.WeaponData[data.name].durability
     if WeaponSlot then
-        if not IsWeaponBlocked(WeaponData.name) then 
+        if not IsWeaponBlocked(WeaponData.name) then
             if WeaponSlot.info.quality then
                 for _ = 1, RepeatAmount, 1 do
                     if WeaponSlot.info.quality - DecreaseAmount > 0 then
@@ -213,14 +224,14 @@ RegisterNetEvent('weapons:server:UpdateWeaponQuality', function(data, RepeatAmou
                                 for k, v in pairs(WeaponSlot.info.attachments) do
                                     local HasAttach = HasAttachment(v.component, WeaponSlot.info.attachments)
                                     if HasAttach then
-                                        if not v.item then 
-                                            print('No Item for '..v.component.. ' on '..WeaponData.name..' found. \n' ..json.encode(WeaponSlot.info.attachments))
+                                        if not v.item then
+                                            if Config.Debug then print('No Item for '..v.component.. ' on '..WeaponData.name..' found. \n' ..json.encode(WeaponSlot.info.attachments)) end
                                             Player.Functions.SetInventory(Player.PlayerData.items, true)
                                             return
                                         end
-                                        local DecreaseAttach = Config.DurabilityMultiplier[v.item]
-                                        if not DecreaseAttach then 
-                                            print('No Durability for '..v.item .. ' found, please add it to the Config.DurabilityMultiplier table')
+                                        local DecreaseAttach = Config.WeaponData[v.item].durability
+                                        if not DecreaseAttach then
+                                            if Config.Debug then print('No Durability for '..v.item .. ' found, please add it to the Config.WeaponData table') end
                                             Player.Functions.SetInventory(Player.PlayerData.items, true)
                                             return
                                         end
@@ -263,15 +274,16 @@ RegisterNetEvent('weapons:server:UpdateWeaponQuality', function(data, RepeatAmou
                                 for k, v in pairs(WeaponSlot.info.attachments) do
                                     local HasAttach = HasAttachment(v.component, WeaponSlot.info.attachments)
                                     if HasAttach then
-                                        if not v.item then 
-                                            print('No Item for '..v.component.. ' on '..WeaponData.name..' found. \n' ..json.encode(WeaponSlot.info.attachments))
+                                        if not v.item then
+                                            if Config.Debug then print('No Item for '..v.component.. ' on '..WeaponData.name..' found. \n' ..json.encode(WeaponSlot.info.attachments)) end
                                             Player.Functions.SetInventory(Player.PlayerData.items, true)
-                                            return 
+                                            return
                                         end
-                                        local DecreaseAttach = Config.DurabilityMultiplier[v.item]
-                                        if not DecreaseAttach then print('No Durability for '..v.item .. ' found, please add it to the Config.DurabilityMultiplier table')
+                                        local DecreaseAttach = Config.WeaponData[v.item]
+                                        if not DecreaseAttach then
+                                            if Config.Debug then print('No Durability for '..v.item .. ' found, please add it to the Config.WeaponData table') end
                                             Player.Functions.SetInventory(Player.PlayerData.items, true)
-                                            return 
+                                            return
                                         end
                                         if not v.quality then
                                             v.quality = 100
@@ -339,6 +351,7 @@ RegisterNetEvent("weapons:server:EquipAttachment", function(ItemData, CurrentWea
                 Player.Functions.RemoveItem(ItemData.name, 1)
                 SetTimeout(1000, function()
                     TriggerClientEvent('inventory:client:ItemBox', src, ItemData, "remove")
+                    TriggerClientEvent('weapons:client:ReloadWeapon', src)
                 end)
             else
                 TriggerClientEvent("QBCore:Notify", src, Lang:t('error.attachment_already_on_weapon' , { value = QBCore.Shared.Items[AttachmentData.item].label }), "error", 3500)
@@ -357,20 +370,13 @@ RegisterNetEvent("weapons:server:EquipAttachment", function(ItemData, CurrentWea
             Player.Functions.RemoveItem(ItemData.name, 1)
             SetTimeout(1000, function()
                 TriggerClientEvent('inventory:client:ItemBox', src, ItemData, "remove")
+                TriggerClientEvent('weapons:client:ReloadWeapon', src)
             end)
         end
     end
     if GiveBackItem then
         Player.Functions.AddItem(GiveBackItem, 1, false)
     end
-end)
-
-RegisterNetEvent('weapons:server:removeWeaponAmmoItem', function(item)
-    local Player = QBCore.Functions.GetPlayer(source)
-
-    if not Player or type(item) ~= 'table' or not item.name or not item.slot then return end
-
-    Player.Functions.RemoveItem(item.name, 1, item.slot)
 end)
 
 -------------------------------- COMMANDS --------------------------------
@@ -382,7 +388,7 @@ end, "god")
 -------------------------------- ITEMS --------------------------------
 
 -- AMMO
-QBCore.Functions.CreateUseableItem('pistol_ammo', function(source, item)
+--[[ QBCore.Functions.CreateUseableItem('pistol_ammo', function(source, item)
     TriggerClientEvent('weapons:client:AddAmmo', source, 'AMMO_PISTOL', 12, item)
 end)
 
@@ -408,7 +414,24 @@ end)
 
 QBCore.Functions.CreateUseableItem('emp_ammo', function(source, item)
     TriggerClientEvent('weapons:client:AddAmmo', source, 'AMMO_EMPLAUNCHER', 10, item)
-end)
+end) ]]
+
+-- Ammo boxes
+for box, ammo in pairs(Config.AmmoBoxes) do
+    QBCore.Functions.CreateUseableItem(box, function(source, item)
+        local src = source
+        local Player = QBCore.Functions.GetPlayer(src)
+
+        if not Player then return end
+        if Player.Functions.RemoveItem(item.name, 1) then
+            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item.name], 'remove', 1)
+            Wait(200)
+            if Player.Functions.AddItem(ammo.item, ammo.amount) then
+                TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[ammo.item], 'add', ammo.amount)
+            end
+        end
+    end)
+end
 
 -- TINTS
 QBCore.Functions.CreateUseableItem('weapontint_black', function(source)

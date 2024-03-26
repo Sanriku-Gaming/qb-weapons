@@ -1,363 +1,365 @@
 Config = Config or {}
 
-Config.ReloadTime = math.random(4000, 6000)
+Config.Debug = false
+
+Config.ReloadTime = math.random(2000, 3000)
 
 Config.JamChance = 1000 -- 1/1000 chance of jamming per bullet fired
 
-Config.AttachmentDurability = false -- If you want to disable durability for attachments, set this to false.
--- If an error occurs with attachments, more than likey you have an attachment or weapon that is not in the list below. -- 
+Config.AttachmentDurability = true -- If you want to disable durability for attachments, set this to false.
+-- If an error occurs with attachments, more than likey you have an attachment or weapon that is not in the list below. --
 -- Add the weapon or attachment to the list below and set the value to whatever you want. --
+Config.PeristentFlashlight = true
 
 Config.DurabilityBlockedWeapons = {
-    "weapon_stungun",
-    "weapon_nightstick",
-    "weapon_flashlight",
-    "weapon_unarmed",
+    'weapon_stungun',
+    'weapon_nightstick',
+    'weapon_flashlight',
+    'weapon_unarmed',
 }
 
-Config.DurabilityMultiplier = {
+Config.AmmoItems = {
+    ['AMMO_PISTOL']         = 'pistol_ammo',
+    ['AMMO_RIFLE']          = 'rifle_ammo',
+    ['AMMO_SMG']            = 'smg_ammo',
+    ['AMMO_SHOTGUN']        = 'shotgun_ammo',
+    ['AMMO_MG']             = 'mg_ammo',
+    ['AMMO_SNIPER']         = 'sniper_ammo',
+    ['AMMO_HUNTING']        = 'hunting_ammo',
+    ['AMMO_EMPLAUNCHER']    = 'emp_ammo',
+}
+
+Config.AmmoBoxes = {
+    pistol_ammo_box     = { item = 'pistol_ammo',   amount = 50 },
+    rifle_ammo_box      = { item = 'rifle_ammo',    amount = 75 },
+    smg_ammo_box        = { item = 'smg_ammo',      amount = 50 },
+    shotgun_ammo_box    = { item = 'shotgun_ammo',  amount = 20 },
+    mg_ammo_box         = { item = 'mg_ammo',       amount = 100 },
+    sniper_ammo_box     = { item = 'sniper_ammo',   amount = 10 },
+    hunting_ammo_box    = { item = 'hunting_ammo',  amount = 30 },
+}
+
+Config.WeaponData = {
 	-- Melee
-	-- ['weapon_unarmed'] 			 = 0.15,
-	['weapon_dagger'] 				 = 0.15,
-	['weapon_bat'] 				 	 = 0.15,
-	['weapon_bottle'] 				 = 0.15,
-	['weapon_crowbar'] 				 = 0.15,
-	-- ['weapon_flashlight'] 		 = 0.15,
-	['weapon_golfclub'] 			 = 0.15,
-	['weapon_hammer'] 				 = 0.15,
-	['weapon_hatchet'] 				 = 0.15,
-	['weapon_knuckle'] 				 = 0.15,
-	['weapon_knife'] 				 = 0.15,
-	['weapon_machete'] 				 = 0.15,
-	['weapon_switchblade'] 			 = 0.15,
-	-- ['weapon_nightstick'] 		 = 0.15,
-	['weapon_wrench'] 				 = 0.15,
-	['weapon_battleaxe'] 			 = 0.15,
-	['weapon_poolcue'] 				 = 0.15,
-	['weapon_briefcase'] 			 = 0.15,
-	['weapon_briefcase_02'] 		 = 0.15,
-	['weapon_garbagebag'] 			 = 0.15,
-	['weapon_handcuffs'] 			 = 0.15,
-	['weapon_bread'] 				 = 0.15,
-	['weapon_stone_hatchet'] 		 = 0.15,
+	weapon_unarmed 			        = { durability = 0.00, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+	weapon_dagger 				    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+	weapon_bat 				 	    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+	weapon_bottle 				    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+	weapon_crowbar 				    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+	weapon_flashlight 		        = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+	weapon_golfclub 			    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+	weapon_hammer 				    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+	weapon_hatchet 				    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+	weapon_knuckle 				    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+	weapon_knife 				    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+	weapon_machete 				    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+	weapon_switchblade 			    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+	weapon_nightstick 		        = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+	weapon_wrench 				    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+	weapon_battleaxe 			    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+	weapon_poolcue 				    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+	weapon_briefcase 			    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+	weapon_briefcase_02 		    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+	weapon_garbagebag 			    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+	weapon_handcuffs 			    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+	weapon_bread 				    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+	weapon_stone_hatchet 		    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
 
 	-- Handguns
-	['weapon_pistol'] 				 = 0.15,
-	['weapon_pistol_mk2'] 			 = 0.15,
-	['weapon_combatpistol'] 		 = 0.15,
-	['weapon_appistol'] 			 = 0.15,
-	-- ['weapon_stungun'] 			 = 0.15,
-    -- ['weapon_stungun_mp'] 		 = 0.15,
-	['weapon_pistol50'] 			 = 0.15,
-	['weapon_snspistol'] 			 = 0.15,
-	['weapon_heavypistol'] 			 = 0.15,
-	['weapon_vintagepistol'] 		 = 0.15,
-	['weapon_flaregun'] 			 = 0.15,
-	['weapon_marksmanpistol'] 		 = 0.15,
-	['weapon_revolver'] 			 = 0.15,
-	['weapon_revolver_mk2'] 		 = 0.15,
-	['weapon_doubleaction'] 		 = 0.15,
-	['weapon_snspistol_mk2'] 		 = 0.15,
-	['weapon_raypistol'] 			 = 0.15,
-	['weapon_ceramicpistol'] 		 = 0.15,
-	['weapon_navyrevolver'] 		 = 0.15,
-	['weapon_gadgetpistol'] 		 = 0.15,
+	weapon_pistol 				    = { durability = 0.15, modifier = 0.65, recoil = 0.2, shake = 0.025 }, --ammunation -x
+	weapon_pistol_mk2 			    = { durability = 0.15, modifier = 0.65, recoil = 0.2, shake = 0.025 }, --x
+	weapon_combatpistol 		    = { durability = 0.15, modifier = 0.65, recoil = 0.2, shake = 0.025 },  --x
+	weapon_appistol 			    = { durability = 0.15, modifier = 0.1,  recoil = 0.2, shake = 0.025 }, --blacklisted dont worry about this
+	--weapon_stungun 			        = { durability = 0.15, modifier = 0.1,  recoil = 0.2, shake = 0.025 }, --broken (kinda... there is another script handling it)
+    --weapon_stungun_mp 		        = { durability = 0.15, modifier = 0.2,  recoil = 0.2, shake = 0.025 }, --does not exist
+	weapon_pistol50 			    = { durability = 0.15, modifier = 0.10, recoil = 0.2, shake = 0.025 },
+	weapon_snspistol 			    = { durability = 0.15, modifier = 0.55, recoil = 0.2, shake = 0.025 },  --ammunation
+	weapon_heavypistol 			    = { durability = 0.15, modifier = 0.8,  recoil = 0.2, shake = 0.025 },
+	weapon_vintagepistol 		    = { durability = 0.15, modifier = 0.3,  recoil = 0.2, shake = 0.025 },
+	weapon_flaregun 			    = { durability = 0.15, modifier = 0.1,  recoil = 0.2, shake = 0.025 }, --x
+	weapon_marksmanpistol 		    = { durability = 0.15, modifier = 0.17, recoil = 0.2, shake = 0.025 },--x
+	weapon_revolver 			    = { durability = 0.15, modifier = 0.50, recoil = 0.2, shake = 0.025 },--x
+	weapon_revolver_mk2 		    = { durability = 0.15, modifier = 0.14, recoil = 0.2, shake = 0.025 }, --x
+	weapon_doubleaction 		    = { durability = 0.15, modifier = 0.19, recoil = 0.2, shake = 0.025 }, --x
+	weapon_snspistol_mk2 		    = { durability = 0.15, modifier = 0.15, recoil = 0.2, shake = 0.025 }, --ammunation --x
+	weapon_raypistol 			    = { durability = 0.15, modifier = 0.1,  recoil = 0.2, shake = 0.025 }, --blacklisted
+	weapon_ceramicpistol 		    = { durability = 0.15, modifier = 0.65, recoil = 0.2, shake = 0.025 }, --ammunation -x
+	weapon_navyrevolver 		    = { durability = 0.15, modifier = 0.18, recoil = 0.2, shake = 0.025 }, --x
+	weapon_gadgetpistol 		    = { durability = 0.15, modifier = 0.1,  recoil = 0.2, shake = 0.025 }, --blacklisted
+	weapon_pistolxm3		        = { durability = 0.15, modifier = 0.65, recoil = 0.2, shake = 0.025 }, --ammunation (best) --x
 
 	-- Submachine Guns
-	['weapon_microsmg'] 			 = 0.15,
-	['weapon_smg'] 				     = 0.15,
-	['weapon_smg_mk2'] 				 = 0.15,
-	['weapon_assaultsmg'] 			 = 0.15,
-	['weapon_combatpdw'] 			 = 0.15,
-	['weapon_machinepistol'] 		 = 0.15,
-	['weapon_minismg'] 				 = 0.15,
-	['weapon_raycarbine'] 			 = 0.15,
+	weapon_microsmg 			    = { durability = 0.15, modifier = 0.6, recoil = 0.2, shake = 0.025 },
+	weapon_smg 				        = { durability = 0.15, modifier = 0.6, recoil = 0.2, shake = 0.025 },
+	weapon_smg_mk2 				    = { durability = 0.15, modifier = 0.6, recoil = 0.2, shake = 0.025 },
+	weapon_assaultsmg 			    = { durability = 0.15, modifier = 0.65, recoil = 0.2, shake = 0.025 },
+	weapon_combatpdw 			    = { durability = 0.15, modifier = 0.65, recoil = 0.2, shake = 0.025 },
+	weapon_machinepistol 		    = { durability = 0.15, modifier = 0.6, recoil = 0.2, shake = 0.025 }, --tec9
+	weapon_minismg 				    = { durability = 0.15, modifier = 0.6, recoil = 0.2, shake = 0.025 }, --
+	weapon_raycarbine 			    = { durability = 0.15, modifier = 0.6, recoil = 0.2, shake = 0.025 }, -- blacklisted
 
 	-- Shotguns
-	['weapon_pumpshotgun'] 			= 0.15,
-	['weapon_sawnoffshotgun'] 		= 0.15,
-	['weapon_assaultshotgun'] 		= 0.15,
-	['weapon_bullpupshotgun'] 		= 0.15,
-	['weapon_musket'] 				= 0.15,
-	['weapon_heavyshotgun'] 		= 0.15,
-	['weapon_dbshotgun'] 			= 0.15,
-	['weapon_autoshotgun'] 			= 0.15,
-	['weapon_pumpshotgun_mk2'] 		= 0.15,
-	['weapon_combatshotgun'] 		= 0.15,
+	weapon_pumpshotgun 			    = { durability = 0.15, modifier = 0.3, recoil = 0.2, shake = 0.025 }, --x
+	weapon_sawnoffshotgun 		    = { durability = 0.15, modifier = 0.3, recoil = 0.2, shake = 0.025 }, --x
+	weapon_assaultshotgun 		    = { durability = 0.15, modifier = 0.2, recoil = 0.2, shake = 0.025 }, --x
+	weapon_bullpupshotgun 		    = { durability = 0.15, modifier = 0.6, recoil = 0.2, shake = 0.025 }, --x
+	weapon_musket 				    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 }, --x
+	weapon_heavyshotgun 		    = { durability = 0.15, modifier = 0.4, recoil = 0.2, shake = 0.025 }, --x
+	weapon_dbshotgun 			    = { durability = 0.15, modifier = 0.2, recoil = 0.2, shake = 0.025 }, --x
+	weapon_autoshotgun 			    = { durability = 0.15, modifier = 0.3, recoil = 0.2, shake = 0.025 }, --x
+	weapon_pumpshotgun_mk2 		    = { durability = 0.15, modifier = 0.2, recoil = 0.2, shake = 0.025 }, --x
+	weapon_combatshotgun 		    = { durability = 0.15, modifier = 0.5, recoil = 0.2, shake = 0.025 }, --x
 
 	-- Assault Rifles
-	['weapon_assaultrifle'] 		= 0.15,
-	['weapon_assaultrifle_mk2'] 	= 0.15,
-	['weapon_carbinerifle'] 		= 0.15,
-	['weapon_carbinerifle_mk2'] 	= 0.15,
-	['weapon_advancedrifle'] 		= 0.15,
-	['weapon_specialcarbine'] 		= 0.15,
-	['weapon_bullpuprifle'] 		= 0.15,
-	['weapon_compactrifle'] 		= 0.15,
-	['weapon_specialcarbine_mk2'] 	= 0.15,
-	['weapon_bullpuprifle_mk2'] 	= 0.15,
-	['weapon_militaryrifle'] 		= 0.15,
-    ['weapon_heavyrifle']           = 0.15,
+	weapon_assaultrifle 		    = { durability = 0.15, modifier = 0.15, recoil = 0.2, shake = 0.025 },
+	weapon_assaultrifle_mk2 	    = { durability = 0.15, modifier = 0.15, recoil = 0.2, shake = 0.025 },
+	weapon_carbinerifle 		    = { durability = 0.15, modifier = 0.15, recoil = 0.2, shake = 0.025 },
+	weapon_carbinerifle_mk2 	    = { durability = 0.15, modifier = 0.15, recoil = 0.2, shake = 0.025 },
+	weapon_advancedrifle 		    = { durability = 0.15, modifier = 0.15, recoil = 0.2, shake = 0.025 },
+	weapon_specialcarbine 		    = { durability = 0.15, modifier = 0.15, recoil = 0.2, shake = 0.025 },
+	weapon_bullpuprifle 		    = { durability = 0.15, modifier = 0.15, recoil = 0.2, shake = 0.025 },
+	weapon_compactrifle 		    = { durability = 0.15, modifier = 0.15, recoil = 0.2, shake = 0.025 },
+	weapon_specialcarbine_mk2 	    = { durability = 0.15, modifier = 0.15, recoil = 0.2, shake = 0.025 },
+	weapon_bullpuprifle_mk2 	    = { durability = 0.15, modifier = 0.15, recoil = 0.2, shake = 0.025 },
+	weapon_militaryrifle 		    = { durability = 0.15, modifier = 0.15, recoil = 0.2, shake = 0.025 },
+    weapon_heavyrifle               = { durability = 0.15, modifier = 0.15, recoil = 0.2, shake = 0.025 },
 
 	-- Light Machine Guns
-	['weapon_mg'] 				    = 0.15,
-	['weapon_combatmg'] 			= 0.15,
-	['weapon_gusenberg'] 			= 0.15,
-	['weapon_combatmg_mk2'] 		= 0.15,
+	weapon_mg 				        = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+	weapon_combatmg 			    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+	weapon_gusenberg 			    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+	weapon_combatmg_mk2 		    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
 
 	-- Sniper Rifles
-	['weapon_sniperrifle'] 			= 0.15,
-	['weapon_heavysniper'] 			= 0.15,
-	['weapon_marksmanrifle'] 		= 0.15,
-	['weapon_remotesniper'] 		= 0.15,
-	['weapon_heavysniper_mk2'] 		= 0.15,
-	['weapon_marksmanrifle_mk2'] 	= 0.15,
+	weapon_sniperrifle 			    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+	weapon_heavysniper 			    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+	weapon_marksmanrifle 		    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+	weapon_remotesniper 		    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+	weapon_heavysniper_mk2 		    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+	weapon_marksmanrifle_mk2 	    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
 
 	-- Heavy Weapons
-	['weapon_rpg'] 				    = 0.15,
-	['weapon_grenadelauncher'] 		= 0.15,
-	['weapon_grenadelauncher_smoke']= 0.15,
-    ['weapon_emplauncher']          = 0.15,
-	['weapon_minigun'] 				= 0.15,
-	['weapon_firework'] 			= 0.15,
-	['weapon_railgun'] 				= 0.15,
-	['weapon_hominglauncher'] 		= 0.15,
-	['weapon_compactlauncher'] 		= 0.15,
-	['weapon_rayminigun'] 			= 0.15,
-
-	-- Throwables
-	['weapon_grenade'] 				= 0.15,
-	['weapon_bzgas'] 				= 0.15,
-	['weapon_molotov'] 				= 0.15,
-	['weapon_stickybomb'] 			= 0.15,
-	['weapon_proxmine'] 			= 0.15,
-	['weapon_snowball'] 			= 0.15,
-	['weapon_pipebomb'] 			= 0.15,
-	['weapon_ball'] 				= 0.15,
-	['weapon_smokegrenade'] 		= 0.15,
-	['weapon_flare'] 				= 0.15,
-
-	-- Miscellaneous
-	['weapon_petrolcan'] 			= 0.15,
-	['weapon_fireextinguisher'] 	= 0.15,
-	['weapon_hazardcan'] 			= 0.15,
-    ['weapon_fertilizercan'] 		= 0.15,
+	weapon_rpg 				        = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 }, --blacklisted
+	weapon_grenadelauncher 		    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 }, --blacklisted
+	weapon_grenadelauncher_smoke    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 }, --blacklisted
+    weapon_emplauncher              = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 }, --blacklisted
+	weapon_minigun 				    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 }, --blacklisted
+	weapon_firework 			    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 }, --blacklisted
+	weapon_railgun 				    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 }, --blacklisted
+	weapon_hominglauncher 		    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 }, --blacklisted
+	weapon_compactlauncher 		    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 }, --blacklisted
+	weapon_rayminigun 			    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 }, --blacklisted
 
     -- Custom Weapons
-    ['weapon_ak47'] 		    	= 0.15,
-    ['weapon_de'] 	                = 0.15,
-    ['weapon_fnx45'] 		    	= 0.15,
-    ['weapon_glock17'] 		        = 0.15,
-    ['weapon_m4'] 			        = 0.15,
-    ['weapon_hk416'] 		    	= 0.15,
-    ['weapon_mk14'] 		    	= 0.15,
-    ['weapon_m110'] 		    	= 0.15,
-    ['weapon_huntingrifle']         = 0.20,
-    ['weapon_ar15'] 		    	= 0.15,
-    ['weapon_m9'] 	                = 0.15,
-    ['weapon_m70'] 		    	    = 0.15,
-    ['weapon_m1911'] 		        = 0.15,
-    ['weapon_mac10'] 		    	= 0.15,
-    ['weapon_uzi'] 	                = 0.15,
-    ['weapon_mp9'] 	                = 0.15,
-    ['weapon_mossberg'] 		    = 0.15,
-    ['weapon_remington'] 		    = 0.15,
-    ['weapon_scarh'] 		    	= 0.15,
-    ['weapon_shiv'] 	            = 0.15,
-    ['weapon_katana'] 	            = 0.15,
-    ['weapon_sledgehammer'] 	    = 0.15,
+    weapon_ak47 			        = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_de 	                    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_fnx45 			        = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_glock17 		            = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_m4 			            = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_hk416 			        = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_mk14 			        = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_m110 			        = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_huntingrifle 	        = { durability = 0.20, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_ar15 			        = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_m9 	                    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_m70 			            = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_m1911 		            = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_mac10 			        = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_uzi 	                    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_mp9 	                    = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_mossberg 		        = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_remington 		        = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_scarh 			        = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_shiv 	                = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_katana 	                = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_sledgehammer 	        = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_mp5 			            = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_glock18c 		        = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_glock22 			        = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_aks74 			        = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_ak74 			        = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_ak74 			        = { durability = 0.15, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_perforator 		        = { durability = 0.05, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_bluebfknife 			    = { durability = 0.05, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_bfknife 				    = { durability = 0.05, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_chbfknife 			    = { durability = 0.05, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_crimsonbfknife 		    = { durability = 0.05, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_fadebfknife 			    = { durability = 0.05, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_flipknife 			    = { durability = 0.05, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_forestbfknife 		    = { durability = 0.05, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_gutknife 			    = { durability = 0.05, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_huntsmanknife 		    = { durability = 0.05, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_karambitknife 		    = { durability = 0.05, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_safaribfknife 		    = { durability = 0.05, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_scorchedbfknife 		    = { durability = 0.05, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_slaughterbfknife 	    = { durability = 0.05, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_stainedrbfknife 		    = { durability = 0.05, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+    weapon_urbanrbfknife 		    = { durability = 0.05, modifier = 0.1, recoil = 0.2, shake = 0.025 },
+
+	-- Throwables
+	weapon_grenade 				    = { durability = 0.15 },
+	weapon_bzgas 				    = { durability = 0.15 },
+	weapon_molotov 				    = { durability = 0.15 },
+	weapon_stickybomb 			    = { durability = 0.15 },
+	weapon_proxmine 			    = { durability = 0.15 },
+	weapon_snowball 			    = { durability = 0.15 },
+	weapon_pipebomb 			    = { durability = 0.15 },
+	weapon_ball 				    = { durability = 0.15 },
+	weapon_smokegrenade 		    = { durability = 0.15 },
+	weapon_flare 				    = { durability = 0.15 },
+
+	-- Miscellaneous
+	weapon_petrolcan 			    = { durability = 0.15 },
+	weapon_fireextinguisher 	    = { durability = 0.15 },
+	weapon_hazardcan 			    = { durability = 0.15 },
+    weapon_fertilizercan 		    = { durability = 0.15 },
 
     -- Attachments
-    ['pistol_defaultclip']          = 0.15,
-    ['pistol_extendedclip']         = 0.15,
-    ['pistol_flashlight']           = 0.15,
-    ['pistol_suppressor']           = 0.15,
-    ['pistol_luxuryfinish']         = 0.15,
-    ['combatpistol_defaultclip']    = 0.15,
-    ['combatpistol_extendedclip']   = 0.15,
-    ['combatpistol_luxuryfinish']   = 0.15,
-    ['appistol_defaultclip']        = 0.15,
-    ['appistol_extendedclip']       = 0.15,
-    ['appistol_luxuryfinish']       = 0.15,
-    ['pistol50_defaultclip']        = 0.15,
-    ['pistol50_extendedclip']       = 0.15,
-    ['pistol50_luxuryfinish']       = 0.15,
-    ['revolver_defaultclip']        = 0.15,
-    ['revolver_vipvariant']         = 0.15,
-    ['revolver_bodyguardvariant']   = 0.15,
-    ['snspistol_defaultclip']       = 0.15,
-    ['snspistol_extendedclip']      = 0.15,
-    ['snspistol_grip']              = 0.15,
-    ['heavypistol_defaultclip']     = 0.15,
-    ['heavypistol_extendedclip']    = 0.15,
-    ['heavypistol_grip']            = 0.15,
-    ['vintagepistol_defaultclip']   = 0.15,
-    ['vintagepistol_extendedclip']  = 0.15,
+    pistol_defaultclip              = { durability = 0.15 },
+    pistol_extendedclip             = { durability = 0.15 },
+    pistol_flashlight               = { durability = 0.15 },
+    pistol_suppressor               = { durability = 0.15 },
+    pistol_luxuryfinish             = { durability = 0.15 },
+    combatpistol_defaultclip        = { durability = 0.15 },
+    combatpistol_extendedclip       = { durability = 0.15 },
+    combatpistol_luxuryfinish       = { durability = 0.15 },
+    appistol_defaultclip            = { durability = 0.15 },
+    appistol_extendedclip           = { durability = 0.15 },
+    appistol_luxuryfinish           = { durability = 0.15 },
+    pistol50_defaultclip            = { durability = 0.15 },
+    pistol50_extendedclip           = { durability = 0.15 },
+    pistol50_luxuryfinish           = { durability = 0.15 },
+    revolver_defaultclip            = { durability = 0.15 },
+    revolver_vipvariant             = { durability = 0.15 },
+    revolver_bodyguardvariant       = { durability = 0.15 },
+    snspistol_defaultclip           = { durability = 0.15 },
+    snspistol_extendedclip          = { durability = 0.15 },
+    snspistol_grip                  = { durability = 0.15 },
+    heavypistol_defaultclip         = { durability = 0.15 },
+    heavypistol_extendedclip        = { durability = 0.15 },
+    heavypistol_grip                = { durability = 0.15 },
+    vintagepistol_defaultclip       = { durability = 0.15 },
+    vintagepistol_extendedclip      = { durability = 0.15 },
 
-    ['microsmg_defaultclip']        = 0.15,
-    ['microsmg_extendedclip']       = 0.15,
-    ['microsmg_scope']              = 0.15,
-    ['microsmg_luxuryfinish']       = 0.15,
-    ['smg_defaultclip']             = 0.15,
-    ['smg_extendedclip']            = 0.15,
-    ['smg_suppressor']              = 0.15,
-    ['smg_drum']                    = 0.15,
-    ['smg_scope']                   = 0.15,
-    ['smg_luxuryfinish']            = 0.15,
-    ['assaultsmg_defaultclip']      = 0.15,
-    ['assaultsmg_extendedclip']     = 0.15,
-    ['assaultsmg_luxuryfinish']     = 0.15,
-    ['minismg_defaultclip']         = 0.15,
-    ['minismg_extendedclip']        = 0.15,
-    ['machinepistol_defaultclip']   = 0.15,
-    ['machinepistol_extendedclip']  = 0.15,
-    ['machinepistol_drum']          = 0.15,
-    ['combatpdw_defaultclip']       = 0.15,
-    ['combatpdw_extendedclip']      = 0.15,
-    ['combatpdw_drum']              = 0.15,
-    ['combatpdw_grip']              = 0.15,
-    ['combatpdw_scope']             = 0.15,
+    microsmg_defaultclip            = { durability = 0.15 },
+    microsmg_extendedclip           = { durability = 0.15 },
+    microsmg_scope                  = { durability = 0.15 },
+    microsmg_luxuryfinish           = { durability = 0.15 },
+    smg_defaultclip                 = { durability = 0.15 },
+    smg_extendedclip                = { durability = 0.15 },
+    smg_suppressor                  = { durability = 0.15 },
+    smg_drum                        = { durability = 0.15 },
+    smg_scope                       = { durability = 0.15 },
+    smg_luxuryfinish                = { durability = 0.15 },
+    assaultsmg_defaultclip          = { durability = 0.15 },
+    assaultsmg_extendedclip         = { durability = 0.15 },
+    assaultsmg_luxuryfinish         = { durability = 0.15 },
+    minismg_defaultclip             = { durability = 0.15 },
+    minismg_extendedclip            = { durability = 0.15 },
+    machinepistol_defaultclip       = { durability = 0.15 },
+    machinepistol_extendedclip      = { durability = 0.15 },
+    machinepistol_drum              = { durability = 0.15 },
+    combatpdw_defaultclip           = { durability = 0.15 },
+    combatpdw_extendedclip          = { durability = 0.15 },
+    combatpdw_drum                  = { durability = 0.15 },
+    combatpdw_grip                  = { durability = 0.15 },
+    combatpdw_scope                 = { durability = 0.15 },
 
-    ['shotgun_suppressor']          = 0.15,
-    ['pumpshotgun_luxuryfinish']    = 0.15,
-    ['sawnoffshotgun_luxuryfinish'] = 0.15,
-    ['assaultshotgun_defaultclip']  = 0.15,
-    ['assaultshotgun_extendedclip'] = 0.15,
-    ['heavyshotgun_defaultclip']    = 0.15,
-    ['heavyshotgun_extendedclip']   = 0.15,
-    ['heavyshotgun_drum']           = 0.15,
+    shotgun_suppressor              = { durability = 0.15 },
+    pumpshotgun_luxuryfinish        = { durability = 0.15 },
+    sawnoffshotgun_luxuryfinish     = { durability = 0.15 },
+    assaultshotgun_defaultclip      = { durability = 0.15 },
+    assaultshotgun_extendedclip     = { durability = 0.15 },
+    heavyshotgun_defaultclip        = { durability = 0.15 },
+    heavyshotgun_extendedclip       = { durability = 0.15 },
+    heavyshotgun_drum               = { durability = 0.15 },
 
-    ['assaultrifle_defaultclip']    = 0.15,
-    ['assaultrifle_extendedclip']   = 0.15,
-    ['assaultrifle_drum']           = 0.15,
-    ['rifle_flashlight']            = 0.15,
-    ['rifle_grip']                  = 0.15,
-    ['rifle_suppressor']            = 0.15,
-    ['assaultrifle_luxuryfinish']   = 0.15,
-    ['carbinerifle_defaultclip']    = 0.15,
-    ['carbinerifle_extendedclip']   = 0.15,
-    ['carbinerifle_drum']           = 0.15,
-    ['carbinerifle_scope']          = 0.15,
-    ['carbinerifle_luxuryfinish']   = 0.15,
-    ['advancedrifle_defaultclip']   = 0.15,
-    ['advancedrifle_extendedclip']  = 0.15,
-    ['advancedrifle_luxuryfinish']  = 0.15,
-    ['specialcarbine_defaultclip']  = 0.15,
-    ['specialcarbine_extendedclip'] = 0.15,
-    ['specialcarbine_drum']         = 0.15,
-    ['specialcarbine_luxuryfinish'] = 0.15,
-    ['bullpuprifle_defaultclip']    = 0.15,
-    ['bullpuprifle_extendedclip']   = 0.15,
-    ['bullpuprifle_luxuryfinish']   = 0.15,
-    ['compactrifle_defaultclip']    = 0.15,
-    ['compactrifle_extendedclip']   = 0.15,
-    ['compactrifle_drum']           = 0.15,
-    ['gusenberg_defaultclip']       = 0.15,
-    ['gusenberg_extendedclip']      = 0.15,
+    assaultrifle_defaultclip        = { durability = 0.15 },
+    assaultrifle_extendedclip       = { durability = 0.15 },
+    assaultrifle_drum               = { durability = 0.15 },
+    rifle_flashlight                = { durability = 0.15 },
+    rifle_grip                      = { durability = 0.15 },
+    rifle_suppressor                = { durability = 0.15 },
+    assaultrifle_luxuryfinish       = { durability = 0.15 },
+    carbinerifle_defaultclip        = { durability = 0.15 },
+    carbinerifle_extendedclip       = { durability = 0.15 },
+    carbinerifle_drum               = { durability = 0.15 },
+    carbinerifle_scope              = { durability = 0.15 },
+    carbinerifle_luxuryfinish       = { durability = 0.15 },
+    advancedrifle_defaultclip       = { durability = 0.15 },
+    advancedrifle_extendedclip      = { durability = 0.15 },
+    advancedrifle_luxuryfinish      = { durability = 0.15 },
+    specialcarbine_defaultclip      = { durability = 0.15 },
+    specialcarbine_extendedclip     = { durability = 0.15 },
+    specialcarbine_drum             = { durability = 0.15 },
+    specialcarbine_luxuryfinish     = { durability = 0.15 },
+    bullpuprifle_defaultclip        = { durability = 0.15 },
+    bullpuprifle_extendedclip       = { durability = 0.15 },
+    bullpuprifle_luxuryfinish       = { durability = 0.15 },
+    compactrifle_defaultclip        = { durability = 0.15 },
+    compactrifle_extendedclip       = { durability = 0.15 },
+    compactrifle_drum               = { durability = 0.15 },
+    gusenberg_defaultclip           = { durability = 0.15 },
+    gusenberg_extendedclip          = { durability = 0.15 },
 
-    ['sniperrifle_defaultclip']     = 0.15,
-    ['sniper_scope']                = 0.15,
-    ['snipermax_scope']             = 0.15,
-    ['sniper_grip']                 = 0.15,
-    ['heavysniper_defaultclip']     = 0.15,
-    ['marksmanrifle_defaultclip']   = 0.15,
-    ['marksmanrifle_extendedclip']  = 0.15,
-    ['marksmanrifle_scope']         = 0.15,
-    ['marksmanrifle_luxuryfinish']  = 0.15,
-}
-
--- Weapons Damage; modifier = 1.0 is default. Go below 1.0 and the damage will be reduced, go above 1.0 and damage will become higher.
--- Set disableCriticalHits to true to disable. Set it to false to enable.
-
-Config.WeaponsDamage = {
-    [`WEAPON_UNARMED`] = {model = `WEAPON_UNARMED`, modifier = 0.2, disableCriticalHits = true},
-    [`WEAPON_FLASHLIGHT`] = {model = `WEAPON_NIGHTSTICK`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_KNIFE`] = {model = `WEAPON_KNIFE`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_KNUCKLE`] = {model = `WEAPON_KNUCKLE`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_NIGHTSTICK`] = {model = `WEAPON_NIGHTSTICK`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_HAMMER`] = {model = `WEAPON_HAMMER`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_BAT`] = {model = `WEAPON_BAT`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_GOLFCLUB`] = {model = `WEAPON_GOLFCLUB`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_CROWBAR`] = {model = `WEAPON_CROWBAR`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_BOTTLE`] = {model = `WEAPON_BOTTLE`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_DAGGER`] = {model = `WEAPON_DAGGER`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_HATCHET`] = {model = `WEAPON_HATCHET`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_MACHETE`] = {model = `WEAPON_MACHETE`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_SWITCHBLADE`] = {model = `WEAPON_SWITCHBLADE`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_PROXMINE`] = {model = `WEAPON_PROXMINE`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_BZGAS`] = {model = `WEAPON_BZGAS`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_SMOKEGRENADE`] = {model = `WEAPON_SMOKEGRENADE`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_MOLOTOV`] = {model = `WEAPON_MOLOTOV`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_REVOLVER`] = {model = `WEAPON_REVOLVER`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_POOLCUE`] = {model = `WEAPON_POOLCUE`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_PIPEWRENCH`] = {model = `WEAPON_PIPEWRENCH`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_PISTOL`] = {model = `WEAPON_PISTOL`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_PISTOL_MK2`] = {model = `WEAPON_PISTOL_MK2`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_COMBATPISTOL`] = {model = `WEAPON_COMBATPISTOL`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_APPISTOL`] = {model = `WEAPON_APPISTOL`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_PISTOL50`] = {model = `WEAPON_PISTOL50`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_SNSPISTOL`] = {model = `WEAPON_SNSPISTOL`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_HEAVYPISTOL`] = {model = `WEAPON_HEAVYPISTOL`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_VINTAGEPISTOL`] = {model = `WEAPON_VINTAGEPISTOL`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_FLAREGUN`] = {model = `WEAPON_FLAREGUN`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_MARKSMANPISTOL`] = {model = `WEAPON_MARKSMANPISTOL`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_MICROSMG`] = {model = `WEAPON_MICROSMG`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_MINISMG`] = {model = `WEAPON_MINISMG`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_SMG`] = {model = `WEAPON_SMG`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_SMG_MK2`] = {model = `WEAPON_SMG_MK2`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_ASSAULTSMG`] = {model = `WEAPON_ASSAULTSMG`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_MG`] = {model = `WEAPON_MG`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_COMBATMG`] = {model = `WEAPON_COMBATMG`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_COMBATMG_MK2`] = {model = `WEAPON_COMBATMG_MK2`, modifier = 0.1, disableCriticalHits = true},
-    [`WEAPON_COMBATPDW`] = {model = `WEAPON_COMBATPDW`, modifier = 0.1, disableCriticalHits = true},
+    sniperrifle_defaultclip         = { durability = 0.15 },
+    sniper_scope                    = { durability = 0.15 },
+    snipermax_scope                 = { durability = 0.15 },
+    sniper_grip                     = { durability = 0.15 },
+    heavysniper_defaultclip         = { durability = 0.15 },
+    marksmanrifle_defaultclip       = { durability = 0.15 },
+    marksmanrifle_extendedclip      = { durability = 0.15 },
+    marksmanrifle_scope             = { durability = 0.15 },
+    marksmanrifle_luxuryfinish      = { durability = 0.15 },
 }
 
 Config.Throwables = {
-    'ball',
-    'bzgas',
-    'flare',
-    'grenade',
-    'molotov',
-    'pipebomb',
-    'proxmine',
-    'smokegrenade',
-    'snowball',
-    'stickybomb'
+    'weapon_ball',
+    'weapon_bzgas',
+    'weapon_flare',
+    'weapon_grenade',
+    'weapon_molotov',
+    'weapon_pipebomb',
+    'weapon_proxmine',
+    'weapon_smokegrenade',
+    'weapon_snowball',
+    'weapon_stickybomb',
+    'weapon_stungrenade',
 }
 
 Config.RepairPoints = {
     [1] = {
         coords = vector4(11.17, -1098.84, 29.8, 156.87),
-        type = "public", --public, job, gang, private
-        --jobs = { ["police"] = 0 },
-        --gangs = { ["ammu"] = 0, ["rrmc"] = 0 }, 
-        --citizenids = {["JFD98238"] = true, ["HJS29340"] = true},
+        type = 'public', --public, job, gang, private
+        --jobs = { ['police'] = 0 },
+        --gangs = { ['ammu'] = 0, ['rrmc'] = 0 },
+        --citizenids = {['JFD98238'] = true, ['HJS29340'] = true},
         repairCosts = {
-            ["pistol"] = {cost = 2000, time = math.random(1,5)},
-            ["smg"] = {cost = 4000, time = math.random(1,5)},
-            ["mg"] = {cost = 6000, time = math.random(1,5)},
-            ["shotgun"] = {cost = 6000, time = math.random(1,5)},
-            ["rifle"] = {cost = 5000, time = math.random(1,5)},
-            ["sniper"] = {cost = 7000, time = math.random(1,5)},
+            ['pistol'] =    {cost = 2000, time = math.random(1,5)},
+            ['smg'] =       {cost = 4000, time = math.random(1,5)},
+            ['mg'] =        {cost = 6000, time = math.random(1,5)},
+            ['shotgun'] =   {cost = 6000, time = math.random(1,5)},
+            ['rifle'] =     {cost = 5000, time = math.random(1,5)},
+            ['sniper'] =    {cost = 7000, time = math.random(1,5)},
         },
-        tableTimeout = false, -- Set to false if you don't want to use the table timeout. Time is in minutes
+        tableTimeout = 10, -- Set to false if you don't want to use the table timeout. Time is in minutes
         IsRepairing = false,
         RepairingData = {},
         debug = false
     },
     [2] = {
         coords = vector4(14.13, -1099.94, 29.8, 160.38),
-        type = "public", --public, job, gang, private
-        --jobs = { ["police"] = 0 },
-        --gangs = { ["ammu"] = 0, ["rrmc"] = 0 }, 
-        --citizenids = {["JFD98238"] = true, ["HJS29340"] = true},
+        type = 'public', --public, job, gang, private
+        --jobs = { ['police'] = 0 },
+        --gangs = { ['ammu'] = 0, ['rrmc'] = 0 },
+        --citizenids = {['JFD98238'] = true, ['HJS29340'] = true},
         repairCosts = {
-            ["pistol"] = {cost = 2000, time = math.random(1,5)},
-            ["smg"] = {cost = 4000, time = math.random(1,5)},
-            ["mg"] = {cost = 6000, time = math.random(1,5)},
-            ["shotgun"] = {cost = 6000, time = math.random(1,5)},
-            ["rifle"] = {cost = 5000, time = math.random(1,5)},
-            ["sniper"] = {cost = 7000, time = math.random(1,5)},
+            ['pistol'] =    {cost = 2000, time = math.random(1,5)},
+            ['smg'] =       {cost = 4000, time = math.random(1,5)},
+            ['mg'] =        {cost = 6000, time = math.random(1,5)},
+            ['shotgun'] =   {cost = 6000, time = math.random(1,5)},
+            ['rifle'] =     {cost = 5000, time = math.random(1,5)},
+            ['sniper'] =    {cost = 7000, time = math.random(1,5)},
         },
         tableTimeout = 10, -- Set to false if you don't want to use the table timeout. Time is in minutes
         IsRepairing = false,
@@ -366,17 +368,17 @@ Config.RepairPoints = {
     },
     [3] = {
         coords = vector4(17.15, -1101.04, 29.8, 159.48),
-        type = "public", --public, job, gang, private
-        --jobs = { ["police"] = 0 },
-        --gangs = { ["ammu"] = 0, ["rrmc"] = 0 }, 
-        --citizenids = {["JFD98238"] = true, ["HJS29340"] = true},
+        type = 'public', --public, job, gang, private
+        --jobs = { ['police'] = 0 },
+        --gangs = { ['ammu'] = 0, ['rrmc'] = 0 },
+        --citizenids = {['JFD98238'] = true, ['HJS29340'] = true},
         repairCosts = {
-            ["pistol"] = {cost = 2000, time = math.random(1,3)},
-            ["smg"] = {cost = 4000, time = math.random(1,3)},
-            ["mg"] = {cost = 6000, time = math.random(1,3)},
-            ["shotgun"] = {cost = 6000, time = math.random(1,3)},
-            ["rifle"] = {cost = 5000, time = math.random(1,3)},
-            ["sniper"] = {cost = 7000, time = math.random(1,3)},
+            ['pistol'] =    {cost = 2000, time = math.random(1,5)},
+            ['smg'] =       {cost = 4000, time = math.random(1,5)},
+            ['mg'] =        {cost = 6000, time = math.random(1,5)},
+            ['shotgun'] =   {cost = 6000, time = math.random(1,5)},
+            ['rifle'] =     {cost = 5000, time = math.random(1,5)},
+            ['sniper'] =    {cost = 7000, time = math.random(1,5)},
         },
         tableTimeout = 10, -- Set to false if you don't want to use the table timeout. Time is in minutes
         IsRepairing = false,
@@ -409,6 +411,26 @@ WeaponAttachments = {
         ['luxuryfinish'] = {
             component = 'COMPONENT_PISTOL_VARMOD_LUXE',
             item = 'pistol_luxuryfinish',
+        },
+    },
+    ['WEAPON_GLOCK17'] = {
+        ['defaultclip'] = {
+            component = 'COMPONENT_GLOCK17_CLIP_01',
+            item = 'pistol_defaultclip',
+            type = 'clip',
+        },
+        ['extendedclip'] = {
+            component = 'COMPONENT_GLOCK17_CLIP_02',
+            item = 'pistol_extendedclip',
+            type = 'clip',
+        },
+        ['flashlight'] = {
+            component = 'COMPONENT_AT_PI_FLSH',
+            item = 'pistol_flashlight',
+        },
+        ['suppressor'] = {
+            component = 'COMPONENT_AT_PI_SUPP',
+            item = 'pistol_suppressor',
         },
     },
     ['WEAPON_M9'] = {
@@ -445,126 +467,6 @@ WeaponAttachments = {
             item = 'pistol_suppressor',
         },
     },
-    ['WEAPON_MP9'] = {
-        ['defaultclip'] = {
-            component = 'COMPONENT_MP9_CLIP_01',
-            item = 'microsmg_defaultclip',
-            type = 'clip',
-        },
-        ['extendedclip'] = {
-            component = 'COMPONENT_MP9_CLIP_02',
-            item = 'microsmg_extendedclip',
-            type = 'clip',
-        },
-        ['suppressor'] = {
-            component = 'COMPONENT_AT_AR_SUPP_02',
-            item = 'pistol_suppressor',
-        },
-        ['scope'] = {
-            component = 'COMPONENT_AT_SCOPE_MACRO',
-            item = 'microsmg_scope',
-        },
-    },
-    ['WEAPON_UZI'] = {
-        ['defaultclip'] = {
-            component = 'COMPONENT_MICROSMG_CLIP_01',
-            item = 'microsmg_defaultclip',
-            type = 'clip',
-        },
-        ['extendedclip'] = {
-            component = 'COMPONENT_MICROSMG_CLIP_02',
-            item = 'microsmg_extendedclip',
-            type = 'clip',
-        },
-        ['suppressor'] = {
-            component = 'COMPONENT_AT_AR_SUPP_02',
-            item = 'pistol_suppressor',
-        },
-    },
-    ['WEAPON_MAC10'] = {
-        ['defaultclip'] = {
-            component = 'COMPONENT_MICROSMG_CLIP_01',
-            item = 'microsmg_defaultclip',
-            type = 'clip',
-        },
-        ['extendedclip'] = {
-            component = 'COMPONENT_MICROSMG_CLIP_02',
-            item = 'microsmg_extendedclip',
-            type = 'clip',
-        },
-        ['flashlight'] = {
-            component = 'COMPONENT_AT_PI_FLSH',
-            item = 'pistol_flashlight',
-        },
-        ['suppressor'] = {
-            component = 'COMPONENT_AT_AR_SUPP_02',
-            item = 'pistol_suppressor',
-        },
-    },
-    ['WEAPON_AK47'] = {
-        ['defaultclip'] = {
-            component = 'COMPONENT_AK47_CLIP_01',
-            item = 'assaultrifle_defaultclip',
-            type = 'clip',
-        },
-        ['extendedclip'] = {
-            component = 'COMPONENT_AK47_CLIP_02',
-            item = 'assaultrifle_extendedclip',
-            type = 'clip',
-        },
-        ['suppressor'] = {
-            component = 'COMPONENT_AT_AR_SUPP_02',
-            item = 'rifle_suppressor',
-        },
-    },
-    ['WEAPON_M70'] = {
-        ['defaultclip'] = {
-            component = 'COMPONENT_M70_CLIP_01',
-            item = 'assaultrifle_defaultclip',
-            type = 'clip',
-        },
-        ['suppressor'] = {
-            component = 'COMPONENT_AT_AR_SUPP_02',
-            item = 'rifle_suppressor',
-        },
-    },
-    ['WEAPON_M110'] = {
-        ['defaultclip'] = {
-            component = 'COMPONENT_M110_CLIP_01',
-            item = 'marksmanrifle_defaultclip',
-            type = 'clip',
-        },
-        ['extendedclip'] = {
-            component = 'COMPONENT_M110_CLIP_02',
-            item = 'marksmanrifle_extendedclip',
-            type = 'clip',
-        },
-        ['suppressor'] = {
-            component = 'COMPONENT_AT_AR_SUPP',
-            item = 'rifle_suppressor',
-        },
-    },
-    ['WEAPON_HK416'] = {
-        ['defaultclip'] = {
-            component = 'COMPONENT_HK416_CLIP_01',
-            item = 'carbinerifle_defaultclip',
-            type = 'clip',
-        },
-        ['extendedclip'] = {
-            component = 'COMPONENT_HK416_CLIP_02',
-            item = 'carbinerifle_extendedclip',
-            type = 'clip',
-        },
-        ['flashlight'] = {
-            component = 'COMPONENT_AT_AR_FLSH',
-            item = 'rifle_flashlight',
-        },
-        ['suppressor'] = {
-            component = 'COMPONENT_AT_AR_SUPP',
-            item = 'rifle_suppressor',
-        },
-    },
-
     ['WEAPON_COMBATPISTOL'] = {
         ['defaultclip'] = {
             component = 'COMPONENT_COMBATPISTOL_CLIP_01',
@@ -860,6 +762,62 @@ WeaponAttachments = {
         ['scope'] = {
             component = 'COMPONENT_AT_SCOPE_SMALL',
             item = 'combatpdw_scope',
+        },
+    },
+    ['WEAPON_MP9'] = {
+        ['defaultclip'] = {
+            component = 'COMPONENT_MP9_CLIP_01',
+            item = 'microsmg_defaultclip',
+            type = 'clip',
+        },
+        ['extendedclip'] = {
+            component = 'COMPONENT_MP9_CLIP_02',
+            item = 'microsmg_extendedclip',
+            type = 'clip',
+        },
+        ['suppressor'] = {
+            component = 'COMPONENT_AT_AR_SUPP_02',
+            item = 'pistol_suppressor',
+        },
+        ['scope'] = {
+            component = 'COMPONENT_AT_SCOPE_MACRO',
+            item = 'microsmg_scope',
+        },
+    },
+    ['WEAPON_UZI'] = {
+        ['defaultclip'] = {
+            component = 'COMPONENT_MICROSMG_CLIP_01',
+            item = 'microsmg_defaultclip',
+            type = 'clip',
+        },
+        ['extendedclip'] = {
+            component = 'COMPONENT_MICROSMG_CLIP_02',
+            item = 'microsmg_extendedclip',
+            type = 'clip',
+        },
+        ['suppressor'] = {
+            component = 'COMPONENT_AT_AR_SUPP_02',
+            item = 'pistol_suppressor',
+        },
+    },
+    ['WEAPON_MAC10'] = {
+        ['defaultclip'] = {
+            component = 'COMPONENT_MICROSMG_CLIP_01',
+            item = 'microsmg_defaultclip',
+            type = 'clip',
+        },
+        ['extendedclip'] = {
+            component = 'COMPONENT_MICROSMG_CLIP_02',
+            item = 'microsmg_extendedclip',
+            type = 'clip',
+        },
+        ['flashlight'] = {
+            component = 'COMPONENT_AT_PI_FLSH',
+            item = 'pistol_flashlight',
+        },
+        ['suppressor'] = {
+            component = 'COMPONENT_AT_AR_SUPP_02',
+            item = 'pistol_suppressor',
         },
     },
     -- SHOTGUNS
@@ -1183,6 +1141,69 @@ WeaponAttachments = {
         ['luxuryfinish'] = {
             component = 'COMPONENT_BULLPUPRIFLE_VARMOD_LOW',
             item = 'bullpuprifle_luxuryfinish',
+        },
+    },
+    ['WEAPON_AK47'] = {
+        ['defaultclip'] = {
+            component = 'COMPONENT_AK47_CLIP_01',
+            item = 'assaultrifle_defaultclip',
+            type = 'clip',
+        },
+        ['extendedclip'] = {
+            component = 'COMPONENT_AK47_CLIP_02',
+            item = 'assaultrifle_extendedclip',
+            type = 'clip',
+        },
+        ['suppressor'] = {
+            component = 'COMPONENT_AT_AR_SUPP_02',
+            item = 'rifle_suppressor',
+        },
+    },
+    ['WEAPON_M70'] = {
+        ['defaultclip'] = {
+            component = 'COMPONENT_M70_CLIP_01',
+            item = 'assaultrifle_defaultclip',
+            type = 'clip',
+        },
+        ['suppressor'] = {
+            component = 'COMPONENT_AT_AR_SUPP_02',
+            item = 'rifle_suppressor',
+        },
+    },
+    ['WEAPON_M110'] = {
+        ['defaultclip'] = {
+            component = 'COMPONENT_M110_CLIP_01',
+            item = 'marksmanrifle_defaultclip',
+            type = 'clip',
+        },
+        ['extendedclip'] = {
+            component = 'COMPONENT_M110_CLIP_02',
+            item = 'marksmanrifle_extendedclip',
+            type = 'clip',
+        },
+        ['suppressor'] = {
+            component = 'COMPONENT_AT_AR_SUPP',
+            item = 'rifle_suppressor',
+        },
+    },
+    ['WEAPON_HK416'] = {
+        ['defaultclip'] = {
+            component = 'COMPONENT_HK416_CLIP_01',
+            item = 'carbinerifle_defaultclip',
+            type = 'clip',
+        },
+        ['extendedclip'] = {
+            component = 'COMPONENT_HK416_CLIP_02',
+            item = 'carbinerifle_extendedclip',
+            type = 'clip',
+        },
+        ['flashlight'] = {
+            component = 'COMPONENT_AT_AR_FLSH',
+            item = 'rifle_flashlight',
+        },
+        ['suppressor'] = {
+            component = 'COMPONENT_AT_AR_SUPP',
+            item = 'rifle_suppressor',
         },
     },
     -- MACHINE GUNS
